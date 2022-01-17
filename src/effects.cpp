@@ -419,11 +419,11 @@ DRAM_ATTR LEDStripEffect * AllEffects[] =
     new BouncingBallEffect(3, true, true, 1),
 
 
-    new ChannelBeatEffect("ChannelBeat"),
+    //new ChannelBeatEffect("ChannelBeat"),
 
     new StarryNightEffect<BubblyStar>("Little Blooming Rainbow Stars", BlueColors_p, 8.0, 4, LINEARBLEND, 2.0, 0.0, 4), // Blooming Little Rainbow Stars
     new StarryNightEffect<BubblyStar>("Big Blooming Rainbow Stars", RainbowColors_p, 20, 12, LINEARBLEND, 1.0, 0.0, 2),              // Blooming Rainbow Stars
-    new StarryNightEffect<FanStar>("FanStars", RainbowColors_p, 8.0, 1.0, LINEARBLEND, 80.0, 0, 2.0),
+    //new StarryNightEffect<FanStar>("FanStars", RainbowColors_p, 8.0, 1.0, LINEARBLEND, 80.0, 0, 2.0),
 
     new MeteorEffect(20, 1, 25, .15, .05),
     new MeteorEffect(12, 1, 25, .15, .08),
@@ -431,7 +431,7 @@ DRAM_ATTR LEDStripEffect * AllEffects[] =
     new MeteorEffect(1, 1, 5, .15, .25),
     new MeteorEffect(), // Rainbow palette
 
-    new VUEffect(),
+    //new VUEffect(),
 #elif FIRESTICK
 
     new BouncingBallEffect(),

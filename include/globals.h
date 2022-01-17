@@ -483,27 +483,27 @@ extern RemoteDebug Debug;           // Let everyone in the project know about it
     // This is the "Tiki Atomic Fire Lamp" project, which is an LED lamp with 4 arms of 53 LEDs each.
     // Each arm is wired as a separate channel.
 
-    #define ENABLE_WIFI             0               `// Connect to WiFi
+    #define ENABLE_WIFI             1               // Connect to WiFi
     #define INCOMING_WIFI_ENABLED   0               // Accepting incoming color data and commands
-    #define WAIT_FOR_WIFI           0               // Hold in setup until we have WiFi - for strips without effects
-    #define TIME_BEFORE_LOCAL       0               // How many seconds before the lamp times out and shows local content
+    #define WAIT_FOR_WIFI           5000            // Hold in setup until we have WiFi - for strips without effects
+    #define TIME_BEFORE_LOCAL       15000           // How many seconds before the lamp times out and shows local content
 
     #define NUM_LEDS               (MATRIX_WIDTH * MATRIX_HEIGHT)
 
-    #define NUM_CHANNELS    4                       // One per spoke
-    #define MATRIX_WIDTH    53                      // Number of pixels wide (how many LEDs per channel)
-    #define MATRIX_HEIGHT   1                       // Number of pixels tall
-    #define RESERVE_MEMORY  120000                  // How much to leave free for system operation (it's not stable in low mem)
-    #define ENABLE_REMOTE   0                       // IR Remote Control
-    #define ENABLE_AUDIO    1                       // Listen for audio from the microphone and process it
-    #define USE_SCREEN      0                       // Normally we use a tiny board inside the lamp with no screen
-    #define FAN_SIZE        NUM_LEDS                // Allows us to use fan effects on the spokes
-    #define NUM_FANS        1                       // Our fans are on channels, not in sequential order, so only one "fan"
-    #define NUM_RINGS       1   
-    #define LED_FAN_OFFSET_BU 0
-    #define BONUS_PIXELS      0
+    #define NUM_CHANNELS            4               // One per spoke
+    #define MATRIX_WIDTH            53              // Number of pixels wide (how many LEDs per channel)
+    #define MATRIX_HEIGHT           1               // Number of pixels tall
+    #define RESERVE_MEMORY          120000          // How much to leave free for system operation (it's not stable in low mem)
+    #define ENABLE_REMOTE           0               // IR Remote Control
+    #define ENABLE_AUDIO            1               // Listen for audio from the microphone and process it
+    #define USE_SCREEN              0               // Normally we use a tiny board inside the lamp with no screen
+    #define FAN_SIZE                NUM_LEDS        // Allows us to use fan effects on the spokes
+    #define NUM_FANS                1               // Our fans are on channels, not in sequential order, so only one "fan"
+    #define NUM_RINGS               1   
+    #define LED_FAN_OFFSET_BU       0
+    #define BONUS_PIXELS            0
 
-    #define IR_REMOTE_PIN 15                        // Eric's is PIN 35
+    #define IR_REMOTE_PIN           15              // Eric's is PIN 35
 
     #define POWER_LIMIT_MW (1000 * 8 * 5)           // 8 amps, 5 volts
 
@@ -518,10 +518,10 @@ extern RemoteDebug Debug;           // Let everyone in the project know about it
 
     // Eric's Version Wiring is the same.  Which is a complete coincidence but handy!
 
-    #define LED_PIN0         5
-    #define LED_PIN1        16
-    #define LED_PIN2        17
-    #define LED_PIN3        18
+    #define LED_PIN0                 5
+    #define LED_PIN1                16
+    #define LED_PIN2                17
+    #define LED_PIN3                18
 
     #define DEFAULT_EFFECT_INTERVAL     (1000*60*5)
 
@@ -529,16 +529,16 @@ extern RemoteDebug Debug;           // Let everyone in the project know about it
 
     // The "Tiki Fire Umbrella" project, with 8 channels
 
-    #define ENABLE_WIFI             1   // Connect to WiFi
-    #define INCOMING_WIFI_ENABLED   1   // Accepting incoming color data and commands
-    #define WAIT_FOR_WIFI           1   // Hold in setup until we have WiFi - for strips without effects
-    #define TIME_BEFORE_LOCAL       5   // How many seconds before the lamp times out and shows local content
+    #define ENABLE_WIFI             1               // Connect to WiFi
+    #define INCOMING_WIFI_ENABLED   1               // Accepting incoming color data and commands
+    #define WAIT_FOR_WIFI           1               // Hold in setup until we have WiFi - for strips without effects
+    #define TIME_BEFORE_LOCAL       5               // How many seconds before the lamp times out and shows local content
 
-    #define NUM_CHANNELS    8
-    #define MATRIX_WIDTH    228                   // Number of pixels wide (how many LEDs per channel)
-    #define MATRIX_HEIGHT   1                     // Number of pixels tall
-    #define RESERVE_MEMORY  200000                // How much to leave free for system operation (it's not stable in low mem)
-    #define ENABLE_AUDIO    1                     // Listen for audio from the microphone and process it
+    #define NUM_CHANNELS            8
+    #define MATRIX_WIDTH            228             // Number of pixels wide (how many LEDs per channel)
+    #define MATRIX_HEIGHT           1               // Number of pixels tall
+    #define RESERVE_MEMORY          200000          // How much to leave free for system operation (it's not stable in low mem)
+    #define ENABLE_AUDIO            1               // Listen for audio from the microphone and process it
 
 #elif MAGICMIRROR
 

@@ -88,7 +88,7 @@ static const int FanPixelsVertical[FAN_SIZE] =
 {
   0, 15, 1, 14, 2, 13, 3, 12, 4, 11, 5, 10, 6, 9, 7, 8
 };
-#elif FAN_SIZE == 1
+#elif FAN_SIZE || FAN_SIZE == 1
 static const int FanPixelsVertical[FAN_SIZE] =
 {
   0

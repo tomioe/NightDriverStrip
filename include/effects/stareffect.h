@@ -120,7 +120,7 @@ class ColorStar : public MovingFadingColoredObject, public ObjectSize
     }
 };
 
-#if FALSE && NUM_FANS > 0
+#if NUM_FANS > 0
 class FanStar : public ColorStar
 {
   public:
