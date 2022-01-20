@@ -488,25 +488,25 @@ extern RemoteDebug Debug;           // Let everyone in the project know about it
     #define WAIT_FOR_WIFI           5000            // Hold in setup until we have WiFi - for strips without effects
     #define TIME_BEFORE_LOCAL       15000           // How many seconds before the lamp times out and shows local content
 
-    #define NUM_LEDS               (MATRIX_WIDTH * MATRIX_HEIGHT)
+    #define ENABLE_WEBSERVER        1
 
-    #define NUM_CHANNELS            4               // One per spoke
     #define MATRIX_WIDTH            53              // Number of pixels wide (how many LEDs per channel)
     #define MATRIX_HEIGHT           1               // Number of pixels tall
-    #define RESERVE_MEMORY          120000          // How much to leave free for system operation (it's not stable in low mem)
+    #define NUM_LEDS                (MATRIX_WIDTH * MATRIX_HEIGHT)
+    #define NUM_CHANNELS            4               // X per spoke
     #define ENABLE_REMOTE           0               // IR Remote Control
-    #define ENABLE_AUDIO            1               // Listen for audio from the microphone and process it
+    #define ENABLE_AUDIO            0               // Listen for audio from the microphone and process it
     #define USE_SCREEN              0               // Normally we use a tiny board inside the lamp with no screen
     #define FAN_SIZE                NUM_LEDS        // Allows us to use fan effects on the spokes
     #define NUM_FANS                1               // Our fans are on channels, not in sequential order, so only one "fan"
     #define NUM_RINGS               1   
     #define LED_FAN_OFFSET_BU       0
-    #define BONUS_PIXELS            0
+    #define BONUS_PIXELS            0               // Strips are cut specifically to 53 pr strip - no bonus!
 
-    #define IR_REMOTE_PIN           15              // Eric's is PIN 35
+    //#define IR_REMOTE_PIN           15              // Eric's is PIN 35
 
     #define POWER_LIMIT_MW (1000 * 8 * 5)           // 8 amps, 5 volts
-
+    
     // Original Wiring:
     //   Fine red     = 3.3v
     //        brown   = gnd
