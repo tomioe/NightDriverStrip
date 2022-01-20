@@ -442,12 +442,18 @@ template <typename StarType> class StarryNightEffect : public LEDStripEffect
         for (int i = 0; i < cMaxNewStarsPerFrame; i++)
         {
             float prob = _newStarProbability;
-
+            #if ENABLE_AUDIO
             if (_musicFactor != 1.0)
             {
                 //prob = prob * 0.5 + (prob * 0.5 * gVURatio);
                 prob = prob * (gVURatio - 1.0) * _musicFactor;
             }   
+            #else
+            if (_musicFactor != 1.0)
+            {
+                prob = prob * _musicFactor;
+            }
+            #endif
 
             if (randomDouble(0, 1.0) < g_AppTime.DeltaTime() * prob * (float) _cLEDs / 5000.0f)
             {

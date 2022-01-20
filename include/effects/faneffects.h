@@ -912,7 +912,7 @@ class FireFanEffect : public LEDStripEffect
         {
           for (int i = 0 ; i < Sparks; i++)
           {
-              if (random(255) < Sparking / 4 + Sparking * (gVURatio / 2.0) * 0.5)
+              if (random(255) < Sparking / 4 + Sparking * 0.5)
               // if (random(255) < Sparking / 4)
               {
                   int y = CellCount() - 1 - random(SparkHeight * CellsPerLED);
