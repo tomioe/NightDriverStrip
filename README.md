@@ -44,8 +44,8 @@ To use the built-in webserver, you will need to build and upload the SPIFFS imag
 You can do this using the platformio user interface, or using the pio command line tool 
 
 ```
-pio run --target buildfs --environment <project name>
-pio run --target uploadfs --environment <project name>
+pio.exe run --target buildfs --environment <project name>
+pio.exe run --target uploadfs --environment <project name>
 ```
 
 ## Sample Parts (Plummer's Software LLC Amazon Affiliate Links)

@@ -202,6 +202,25 @@ class CSPIFFSWebServer
 		AddCORSHeaderAndSendOKResponse(pRequest);
 	}
 
+	void AdjustBrightness(AsyncWebServerRequest * pRequest) {
+		debugI("AdjustBrightness");
+		// Look for the parameter by name
+		const char * pszAdjBrightness = "adjustBrightness";
+		if (pRequest->hasParam(pszAdjBrightness, true))
+		{
+			// If found, parse it and adjust the global Brightness Setting
+			AsyncWebParameter * param = pRequest->getParam(pszAdjBrightness, true);
+			size_t newBrightness = strtoul(param->value().c_str(), NULL, 10);
+			if(newBrightness >= MIN_BRIGHTNESS && newBrightness <= MAX_BRIGHTNESS) {
+				g_Brightness = newBrightness;
+				debugI("New Brightness Value %d.", newBrightness);
+			} else {
+				debugI("New Brightness was outside of rannge.", newBrightness);
+			}
+		}
+		AddCORSHeaderAndSendOKResponse(pRequest);
+	}
+
 	// begin - register page load handlers and start serving pages
 
 	void begin()
@@ -216,6 +235,8 @@ class CSPIFFSWebServer
 		_server.on("/setCurrentEffectIndex", HTTP_POST, [this](AsyncWebServerRequest * pRequest)	{ this->SetCurrentEffectIndex(pRequest); });
 		_server.on("/enableEffect",   		 HTTP_POST, [this](AsyncWebServerRequest * pRequest)	{ this->EnableEffect(pRequest); });
 		_server.on("/disableEffect", 		 HTTP_POST, [this](AsyncWebServerRequest * pRequest)	{ this->DisableEffect(pRequest); });
+
+		_server.on("/adjustBrightness", 		 HTTP_POST, [this](AsyncWebServerRequest * pRequest)	{ this->AdjustBrightness(pRequest); });
 
 		_server.on("/settings", 		 	 HTTP_POST, [this](AsyncWebServerRequest * pRequest)	{ this->SetSettings(pRequest); });
 

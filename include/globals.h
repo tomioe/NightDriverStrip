@@ -486,14 +486,14 @@ extern RemoteDebug Debug;           // Let everyone in the project know about it
     #define ENABLE_WIFI             1               // Connect to WiFi
     #define INCOMING_WIFI_ENABLED   0               // Accepting incoming color data and commands
     #define WAIT_FOR_WIFI           5000            // Hold in setup until we have WiFi - for strips without effects
-    #define TIME_BEFORE_LOCAL       15000           // How many seconds before the lamp times out and shows local content
+    #define TIME_BEFORE_LOCAL       20000           // How many seconds before the lamp times out and shows local content
 
     #define ENABLE_WEBSERVER        1
 
     #define MATRIX_WIDTH            53              // Number of pixels wide (how many LEDs per channel)
     #define MATRIX_HEIGHT           1               // Number of pixels tall
     #define NUM_LEDS                (MATRIX_WIDTH * MATRIX_HEIGHT)
-    #define NUM_CHANNELS            1               // X per spoke
+    #define NUM_CHANNELS            2               // X per spoke
     #define ENABLE_REMOTE           0               // IR Remote Control
     #define ENABLE_AUDIO            0               // Listen for audio from the microphone and process it
     #define USE_SCREEN              0               // Normally we use a tiny board inside the lamp with no screen
@@ -505,16 +505,14 @@ extern RemoteDebug Debug;           // Let everyone in the project know about it
 
     //#define IR_REMOTE_PIN           15            // We're not using the remote...
 
-   // #define POWER_LIMIT_MW (1000 * 8 * 5)           // 8 amps, 5 volts
-    #define POWER_LIMIT_MW (500 * 1 * 5)           // 8 amps, 5 volts
+    #define POWER_LIMIT_MW (1000 * 5 * 5)           // 5 amps, 5 volts
     
     #define LED_PIN0                 5
     #define LED_PIN1                16
     #define LED_PIN2                17
     #define LED_PIN3                18
 
-    #define DEFAULT_EFFECT_INTERVAL     (1000*30)
-    //#define DEFAULT_EFFECT_INTERVAL     (1000*60*5)
+    #define DEFAULT_EFFECT_INTERVAL     (1000*120)
 
 #elif UMBRELLA
 

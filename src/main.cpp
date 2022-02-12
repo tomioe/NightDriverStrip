@@ -730,7 +730,7 @@ void loop()
         #if ENABLE_OTA
             EVERY_N_MILLIS(10)
             {
-                if (WiFi.isConnected())         
+                if (WiFi.isConnected())
                     ArduinoOTA.handle();
             }
         #endif 
