@@ -213,9 +213,9 @@ class CSPIFFSWebServer
 			size_t newBrightness = strtoul(param->value().c_str(), NULL, 10);
 			if(newBrightness >= MIN_BRIGHTNESS && newBrightness <= MAX_BRIGHTNESS) {
 				g_Brightness = newBrightness;
-				debugI("New Brightness Value %d.", newBrightness);
+				debugV("New Brightness Value %d.", newBrightness);
 			} else {
-				debugI("New Brightness was outside of rannge.", newBrightness);
+				debugI("New Brightness was outside of range.");
 			}
 		}
 		AddCORSHeaderAndSendOKResponse(pRequest);
