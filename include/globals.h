@@ -134,7 +134,7 @@
 // #define REMOTE_CORE             1
 
 #define DRAWING_CORE            0
-#define INCOMING_CORE           0
+#define INCOMING_CORE           1
 #define NET_CORE                1
 #define AUDIO_CORE              1
 #define SCREEN_CORE             1       
@@ -183,7 +183,9 @@ std::string to_string(T value)
 
 #define STRING(num) STR(num)
 
+#ifndef DEBUG_DISABLED
 extern RemoteDebug Debug;           // Let everyone in the project know about it.  If you don't have it, delete this
+#endif
 
 // Project Configuration
 //
@@ -209,14 +211,14 @@ extern RemoteDebug Debug;           // Let everyone in the project know about it
     #define NUM_CHANNELS            1
     #define NUM_RINGS               5
     #define RING_SIZE_0             24
-    #define ENABLE_AUDIO            1
+    #define ENABLE_AUDIO            0
 
     #define POWER_LIMIT_MW       5000   // 1 amp supply at 5 volts assumed
 
     // Once you have a working project, selectively enable various additional features by setting
     // them to 1 in the list below.  This DEMO config assumes no audio (mic), or screen, etc.
 
-    #define ENABLE_WIFI             0   // Connect to WiFi
+    #define ENABLE_WIFI             1   // Connect to WiFi
     #define INCOMING_WIFI_ENABLED   0   // Accepting incoming color data and commands
     #define TIME_BEFORE_LOCAL       0   // How many seconds before the lamp times out and shows local content
     #define ENABLE_NTP              0   // Set the clock from the web
@@ -233,7 +235,7 @@ extern RemoteDebug Debug;           // Let everyone in the project know about it
     // you should be able to see/select the list of effects by visiting the chip's IP in a browser.  You can
     // get the chip's IP by watching the serial output or checking your router for the DHCP given to 'LEDWifi'
 
-    #define ENABLE_WEBSERVER        0   // Turn on the internal webserver
+    #define ENABLE_WEBSERVER        1   // Turn on the internal webserver
 
 #elif STRAND
 
@@ -483,20 +485,22 @@ extern RemoteDebug Debug;           // Let everyone in the project know about it
     // This is the "Tiki Atomic Fire Lamp" project, which is an LED lamp with 4 arms of 53 LEDs each.
     // Each arm is wired as a separate channel.
 
-    #define ENABLE_WIFI             1               // Connect to WiFi
+    #define ENABLE_WIFI             0               // Connect to WiFi
     #define INCOMING_WIFI_ENABLED   0               // Accepting incoming color data and commands
-    #define WAIT_FOR_WIFI           5000            // Hold in setup until we have WiFi - for strips without effects
-    #define TIME_BEFORE_LOCAL       20000           // How many seconds before the lamp times out and shows local content
+    #define WAIT_FOR_WIFI           0               // Hold in setup until we have WiFi - for strips without effects
+    #define TIME_BEFORE_LOCAL       0               // How many seconds before the lamp times out and shows local content
 
-    #define ENABLE_WEBSERVER        1
+    #define ENABLE_WEBSERVER        0
+    #define ENABLE_NTP              0               // Set the clock from the web
+    #define ENABLE_OTA              0               // Accept over the air flash updates
+    #define ENABLE_REMOTE           0               // IR Remote Control
+    #define ENABLE_AUDIO            0               // Listen for audio from the microphone and process it
+    #define USE_SCREEN              0               // Normally we use a tiny board inside the lamp with no screen
 
     #define MATRIX_WIDTH            53              // Number of pixels wide (how many LEDs per channel)
     #define MATRIX_HEIGHT           1               // Number of pixels tall
     #define NUM_LEDS                (MATRIX_WIDTH * MATRIX_HEIGHT)
-    #define NUM_CHANNELS            2               // X per spoke
-    #define ENABLE_REMOTE           0               // IR Remote Control
-    #define ENABLE_AUDIO            0               // Listen for audio from the microphone and process it
-    #define USE_SCREEN              0               // Normally we use a tiny board inside the lamp with no screen
+    #define NUM_CHANNELS            4               // X per spoke
     #define FAN_SIZE                NUM_LEDS        // Allows us to use fan effects on the spokes
     #define NUM_FANS                1               // Our fans are on channels, not in sequential order, so only one "fan"
     #define NUM_RINGS               1   
@@ -505,14 +509,24 @@ extern RemoteDebug Debug;           // Let everyone in the project know about it
 
     //#define IR_REMOTE_PIN           15            // We're not using the remote...
 
-    #define POWER_LIMIT_MW (1000 * 5 * 5)           // 5 amps, 5 volts
+    #define POWER_LIMIT_MW (1000 * 1 * 5)           // 5 amps, 5 volts
     
+#if M5STICKC || M5STICKCPLUS
+    #define LED_PIN0                26
+    #define LED_PIN1                25
+    #define LED_PIN2                32
+    #define LED_PIN3                33
+#else
     #define LED_PIN0                 5
     #define LED_PIN1                16
     #define LED_PIN2                17
     #define LED_PIN3                18
+#endif
 
-    #define DEFAULT_EFFECT_INTERVAL     (1000*120)
+
+    #define DEFAULT_EFFECT_INTERVAL     (1000*60*5)
+
+    #define MAX_BUFFERS (99)
 
 #elif UMBRELLA
 
@@ -925,7 +939,7 @@ extern RemoteDebug Debug;           // Let everyone in the project know about it
 #endif
 
 #ifndef RESERVE_MEMORY
-#define RESERVE_MEMORY 120000
+#define RESERVE_MEMORY 180000
 #endif
 
 #ifndef STRAND_LEDS
@@ -1040,7 +1054,7 @@ extern DRAM_ATTR const int gRingSizeTable[];
 // A Wifi packet can contain color data or potentially other info, like a clock.  Or it could be
 // a stats request.  Beyond color data these are poorly tested and likely can be removed, though
 // stats and clock are handy for debugging!
-
+#if INCOMING_WIFI_ENABLED
 #define WIFI_COMMAND_PIXELDATA   0             // Wifi command contains color data for the strip
 #define WIFI_COMMAND_VU          1             // Wifi command to set the current VU reading
 #define WIFI_COMMAND_CLOCK       2             // Wifi command telling us current time at the server
@@ -1049,6 +1063,7 @@ extern DRAM_ATTR const int gRingSizeTable[];
 #define WIFI_COMMAND_REBOOT      5             // Wifi command to reboot the client chip (that's us!)
 #define WIFI_COMMAND_VU_SIZE     16
 #define WIFI_COMMAND_CLOCK_SIZE  20
+#endif
 
 // Final headers
 // 
