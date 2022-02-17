@@ -65,6 +65,7 @@ extern volatile float gMinVU;
 // Callback function that the debug library (which exposes a little console over telnet and serial) calls
 // in order to allow us to add custom commands.  I've added a clock reset and stats command, for example.
 
+#ifndef DEBUG_DISABLED
 void processRemoteDebugCmd() 
 {
     String str = Debug.getLastCommand();
@@ -111,6 +112,7 @@ void processRemoteDebugCmd()
 
     }
 }
+#endif
 
 // RemoteLoopEntry
 //
