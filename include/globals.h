@@ -79,7 +79,8 @@
 #define FLASH_VERSION_NAME_X(x) "v"#x 
 #define FLASH_VERSION_NAME XSTR(FLASH_VERSION)
 
-#define FASTLED_INTERNAL        1   // Silence FastLED build banners
+
+#define FASTLED_INTERNAL        0   // Silence FastLED build banners
 #define NTP_DELAY_COUNT         20  // delay count for ntp update
 #define NTP_PACKET_LENGTH       48  // ntp packet length
 #define TIME_ZONE             (-8)  // My offset from London (UTC-8)
@@ -106,7 +107,7 @@
 #undef min                                      // They define a min() on us
 #endif
 
-#define EFFECT_CROSS_FADE_TIME 600.0    // How long for an effect to ramp brightness fader down and back during effect change
+#define EFFECT_CROSS_FADE_TIME 3000.0    // How long for an effect to ramp brightness fader down and back during effect change
 
 // Thread priorities
 //
@@ -142,7 +143,6 @@
 #define SOCKET_CORE             1
 #define REMOTE_CORE             1
 
-#define FASTLED_INTERNAL        1   // Suppresses the compilation banner from FastLED
 
 #define __STDC_FORMAT_MACROS
 #include <inttypes.h>
@@ -152,6 +152,8 @@
 #include <memory>
 #include <string>
 
+#define FASTLED_ESP32_I2S           true
+#define FASTLED_ESP32_FLASH_LOCK    1
 #include <FastLED.h>                // FastLED for the LED panels
 #include <pixeltypes.h>             // Handy color and hue stuff
 #include <WiFi.h>
@@ -485,12 +487,12 @@ extern RemoteDebug Debug;           // Let everyone in the project know about it
     // This is the "Tiki Atomic Fire Lamp" project, which is an LED lamp with 4 arms of 53 LEDs each.
     // Each arm is wired as a separate channel.
 
-    #define ENABLE_WIFI             0               // Connect to WiFi
+    #define ENABLE_WIFI             1               // Connect to WiFi
     #define INCOMING_WIFI_ENABLED   0               // Accepting incoming color data and commands
     #define WAIT_FOR_WIFI           0               // Hold in setup until we have WiFi - for strips without effects
     #define TIME_BEFORE_LOCAL       0               // How many seconds before the lamp times out and shows local content
 
-    #define ENABLE_WEBSERVER        0
+    #define ENABLE_WEBSERVER        1
     #define ENABLE_NTP              0               // Set the clock from the web
     #define ENABLE_OTA              0               // Accept over the air flash updates
     #define ENABLE_REMOTE           0               // IR Remote Control
@@ -500,7 +502,7 @@ extern RemoteDebug Debug;           // Let everyone in the project know about it
     #define MATRIX_WIDTH            53              // Number of pixels wide (how many LEDs per channel)
     #define MATRIX_HEIGHT           1               // Number of pixels tall
     #define NUM_LEDS                (MATRIX_WIDTH * MATRIX_HEIGHT)
-    #define NUM_CHANNELS            4               // X per spoke
+    #define NUM_CHANNELS            2               // X per spoke
     #define FAN_SIZE                NUM_LEDS        // Allows us to use fan effects on the spokes
     #define NUM_FANS                1               // Our fans are on channels, not in sequential order, so only one "fan"
     #define NUM_RINGS               1   
@@ -509,24 +511,21 @@ extern RemoteDebug Debug;           // Let everyone in the project know about it
 
     //#define IR_REMOTE_PIN           15            // We're not using the remote...
 
-    #define POWER_LIMIT_MW (1000 * 1 * 5)           // 5 amps, 5 volts
-    
-#if M5STICKC || M5STICKCPLUS
-    #define LED_PIN0                26
-    #define LED_PIN1                25
-    #define LED_PIN2                32
-    #define LED_PIN3                33
-#else
-    #define LED_PIN0                 5
-    #define LED_PIN1                16
-    #define LED_PIN2                17
-    #define LED_PIN3                18
-#endif
-
-
-    #define DEFAULT_EFFECT_INTERVAL     (1000*60*5)
-
+    #define POWER_LIMIT_MW           (1000 * 5 * 5) // 5 amps, 5 volts
+    #define DEFAULT_EFFECT_INTERVAL  (1000 * 60 * 5) // 60secs * 5 = 5mins
     #define MAX_BUFFERS (99)
+
+    #if M5STICKC || M5STICKCPLUS
+        #define LED_PIN0                26
+        #define LED_PIN1                25
+        #define LED_PIN2                32
+        #define LED_PIN3                33
+    #else
+        #define LED_PIN0                 5
+        #define LED_PIN1                16
+        #define LED_PIN2                17
+        #define LED_PIN3                18
+    #endif
 
 #elif UMBRELLA
 

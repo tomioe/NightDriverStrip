@@ -214,7 +214,10 @@ DRAM_ATTR shared_ptr<LEDMatrixGFX>     g_pStrands[NUM_CHANNELS];            // E
 DRAM_ATTR unique_ptr<LEDBufferManager> g_apBufferManager[NUM_CHANNELS];     // Each channel has its own buffer
 DRAM_ATTR unique_ptr<EffectManager>    g_pEffectManager;                    // The one and only global effect manager
 DRAM_ATTR mutex NTPTimeClient::_clockMutex;                                      // Clock guard mutex for SNTP client
+
+#ifndef DEBUG_DISABLED
 DRAM_ATTR RemoteDebug Debug;                                                // Instance of our telnet debug server
+#endif
 
 // If an insulator or tree or fan has multiple rings, this table defines how those rings are laid out such
 // that they add up to FAN_SIZE pixels total per ring.
@@ -256,14 +259,14 @@ extern DRAM_ATTR LEDStripEffect * AllEffects[];      // Main table of internal e
 // DebugLoopTaskEntry
 //
 // Entry point for the Debug task, pumps the Debug handler
-
+#ifndef DEBUG_DISABLED
 void IRAM_ATTR DebugLoopTaskEntry(void *)
 {    
-    debugI(">> DebugLoopTaskEntry\n");
+    debugI(">> DebugLoopTaskEntry");
 
    // Initialize RemoteDebug
 
-    debugV("Starting RemoteDebug server...\n");
+    debugV("Starting RemoteDebug server...");
 
     Debug.setResetCmdEnabled(true);                         // Enable the reset command
     Debug.showProfiler(false);                              // Profiler (Good to measure times, to optimize codes)
@@ -286,6 +289,7 @@ void IRAM_ATTR DebugLoopTaskEntry(void *)
         delay(10);        
     }    
 }
+#endif
 
 // NetworkHandlingLoopEntry
 //
@@ -369,7 +373,7 @@ inline void CheckHeap()
 
 void PrintOutputHeader()
 {
-    debugI("NightDriverStrip\n");
+    debugI("NightDriverStrip");
     debugI("-------------------------------------------------------------------------------------");
     debugI("M5STICKC: %d, USE_TFT: %d, USE_OLED: %d, USE_TFTSPI: %d", M5STICKC, USE_TFT, USE_OLED, USE_TFTSPI);
 
@@ -432,13 +436,15 @@ void setup()
     // Initialize Serial output
     Serial.begin(115200);      
 
-    esp_log_level_set("*", ESP_LOG_WARN);        // set all components to ERROR level  
+    esp_log_level_set("*", ESP_LOG_VERBOSE);        // set all components to ERROR level  
 
     // Set the unhandled exception handler to be our own special exit function                 
     std::set_terminate(TerminateHandler);
 
+#ifndef DEBUG_DISABLED
     // Re-route debug output to the serial port
     Debug.setSerialEnabled(true);
+#endif
 
     // Display a simple statup header on the serial port
     PrintOutputHeader();
@@ -446,8 +452,10 @@ void setup()
 
     // Start Debug
 
-    debugI("Starting DebugLoopTaskEntry");
-    xTaskCreatePinnedToCore(DebugLoopTaskEntry, "Debug Loop", STACK_SIZE, nullptr, DEBUG_PRIORITY, &g_taskDebug, DEBUG_CORE);
+// #ifndef DEBUG_DISABLED
+//     debugI("Starting DebugLoopTaskEntry");
+//     xTaskCreatePinnedToCore(DebugLoopTaskEntry, "Debug Loop", STACK_SIZE, nullptr, DEBUG_PRIORITY, &g_taskDebug, DEBUG_CORE);
+// #endif
     CheckHeap();
 
     delay(100);
@@ -645,10 +653,10 @@ void setup()
     // Microphone stuff
 #if ENABLE_AUDIO    
     pinMode(INPUT_PIN, INPUT);
-#endif
-    
     //pinMode(35, OUTPUT); // Provide an extra ground to be used by the mic module
     //digitalWrite(35, 0);
+#endif
+    
 
 #ifdef POWER_LIMIT_MW
     set_max_power_in_milliwatts(POWER_LIMIT_MW);                // Set brightness limit
@@ -657,15 +665,7 @@ void setup()
     #endif
 #endif
 
-    g_Brightness = 255;
-    
-#if ATOMLIGHT
-    pinMode(4, INPUT);
-    pinMode(12, INPUT);
-    pinMode(13, INPUT);
-    pinMode(14, INPUT);
-    pinMode(15, INPUT);
-#endif
+    g_Brightness = 5;
 
     debugI("Initializing effects manager...");
     InitEffectsManager();
@@ -686,11 +686,12 @@ void setup()
         debugI("Unable to connect to WiFi, but must have it, so rebooting...\n");
         throw runtime_error("Unable to connect to WiFi, but must have it, so rebooting");
     }
+    #ifndef DEBUG_DISABLED
     Debug.setSerialEnabled(true);
+    #endif
 #endif
 
     // Init the zlib comprfession
-
     debugI("Initializing compression...");
     uzlib_init();
     CheckHeap();
@@ -735,6 +736,6 @@ void loop()
             }
         #endif 
 
-        delay(10);        
+        // delay(10);   
     }
 }
