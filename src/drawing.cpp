@@ -156,6 +156,7 @@ void IRAM_ATTR DrawLoopTaskEntry(void *)
         
         uint cPixelsDrawnThisFrame = 0;
  
+        #if INCOMING_WIFI_ENABLED
         if (WiFi.isConnected())
         {
             timeval tv;
@@ -211,6 +212,7 @@ void IRAM_ATTR DrawLoopTaskEntry(void *)
         {
             debugV("Not connected to WiFi so not checking for WiFi draw.");
         }
+        #endif
 
         // If we didn't draw now, and it's been a while since we did, and we have at least one local effect, then draw the local effect instead
         
