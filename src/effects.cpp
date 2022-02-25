@@ -408,28 +408,30 @@ DRAM_ATTR LEDStripEffect * AllEffects[] =
     new StarryNightEffect<QuietStar>("Rainbow Twinkle Stars", RainbowColors_p, STARRYNIGHT_PROBABILITY, 1, LINEARBLEND, 2.0, 0.0, STARRYNIGHT_MUSICFACTOR), // Rainbow Twinkle
     new DoublePaletteEffect(),
 #elif ATOMLIGHT
-   // new ColorFillEffect(CRGB::White, 1),
+//  new ColorFillEffect(CRGB::White, 1),
     new FireFanEffect(NUM_LEDS,      1, 15, 80, 2, 7, Sequential, true, false),
     new FireFanEffect(NUM_LEDS,      1, 15, 80, 2, 7, Sequential, true, false, true),
- //   new BlueFireFanEffect(NUM_LEDS,      2, 5, 120, 1, 1, Sequential, true, false),
- //  new GreenFireFanEffect(NUM_LEDS,      2, 3, 100, 1, 1, Sequential, true, false),
-   // new RainbowFillEffect(60, 0),
-   // new ColorCycleEffect(Sequential),
-    //new PaletteEffect(RainbowColors_p, 4, 0.1, 0.0, 1.0, 0.0),
-  //  new BouncingBallEffect(3, true, true, 1),
+//  new BlueFireFanEffect(NUM_LEDS,      2, 5, 120, 1, 1, Sequential, true, false),
+//  new GreenFireFanEffect(NUM_LEDS,      2, 3, 100, 1, 1, Sequential, true, false),
+//  new ColorCycleEffect(Sequential),
+//  new PaletteEffect(RainbowColors_p, 4, 0.1, 0.0, 1.0, 0.0),
 
 
-    //new ChannelBeatEffect("ChannelBeat"),
+//  new ChannelBeatEffect("ChannelBeat"),
 
-    new StarryNightEffect<BubblyStar>("Little Blooming Rainbow Stars", BlueColors_p, 8.0, 4, LINEARBLEND, 2.0, 0.0, 4), // Blooming Little Rainbow Stars
-   // new StarryNightEffect<BubblyStar>("Big Blooming Rainbow Stars", RainbowColors_p, 20, 12, LINEARBLEND, 1.0, 0.0, 2),              // Blooming Rainbow Stars
-    //new StarryNightEffect<FanStar>("FanStars", RainbowColors_p, 8.0, 1.0, LINEARBLEND, 80.0, 0, 2.0),
 
     new MeteorEffect(20, 1, 25, .15, .05),
     new MeteorEffect(12, 1, 25, .15, .08),
     new MeteorEffect(6, 1, 25, .15, .12),
     new MeteorEffect(1, 1, 5, .15, .25),
     new MeteorEffect(), // Rainbow palette
+
+    new StarryNightEffect<BubblyStar>("Little Blooming Rainbow Stars", BlueColors_p, 8.0, 4, LINEARBLEND, 2.0, 0.0, 4), // Blooming Little Rainbow Stars
+    new StarryNightEffect<BubblyStar>("Big Blooming Rainbow Stars", RainbowColors_p, 20, 12, LINEARBLEND, 1.0, 0.0, 2),              // Blooming Rainbow Stars
+    // new StarryNightEffect<FanStar>("FanStars", RainbowColors_p, 8.0, 1.0, LINEARBLEND, 80.0, 0, 2.0),
+
+    new RainbowFillEffect(60, 0),
+    new BouncingBallEffect(3, true, true, 1)
 
     //new VUEffect(),
 #elif FIRESTICK

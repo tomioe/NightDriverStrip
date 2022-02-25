@@ -80,7 +80,7 @@
 #define FLASH_VERSION_NAME XSTR(FLASH_VERSION)
 
 
-#define FASTLED_INTERNAL        0   // Silence FastLED build banners
+#define FASTLED_INTERNAL        1   // Silence FastLED build banners
 #define NTP_DELAY_COUNT         20  // delay count for ntp update
 #define NTP_PACKET_LENGTH       48  // ntp packet length
 #define TIME_ZONE             (-8)  // My offset from London (UTC-8)
@@ -107,7 +107,7 @@
 #undef min                                      // They define a min() on us
 #endif
 
-#define EFFECT_CROSS_FADE_TIME 3000.0    // How long for an effect to ramp brightness fader down and back during effect change
+#define EFFECT_CROSS_FADE_TIME 600.0    // How long for an effect to ramp brightness fader down and back during effect change
 
 // Thread priorities
 //
@@ -502,7 +502,7 @@ extern RemoteDebug Debug;           // Let everyone in the project know about it
     #define MATRIX_WIDTH            53              // Number of pixels wide (how many LEDs per channel)
     #define MATRIX_HEIGHT           1               // Number of pixels tall
     #define NUM_LEDS                (MATRIX_WIDTH * MATRIX_HEIGHT)
-    #define NUM_CHANNELS            2               // X per spoke
+    #define NUM_CHANNELS            4               // X per spoke
     #define FAN_SIZE                NUM_LEDS        // Allows us to use fan effects on the spokes
     #define NUM_FANS                1               // Our fans are on channels, not in sequential order, so only one "fan"
     #define NUM_RINGS               1   

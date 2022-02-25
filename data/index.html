@@ -254,6 +254,7 @@
         function BasePageForRequests()
         {
             // REVIEW(davepl) - Found this here, not entirely sure why or what it does
+            // REPLY(tomioe) - This is for when index.html is tested in local browser, and API is served from e.g. an Express NodeJS server.
             //
             if (window.location.protocol == "file:")
                return "http://127.0.0.1:3000";
@@ -457,7 +458,7 @@
         } );
 
         UpdateEffectList(null);
-        setTimeout(RequestEffectList, 1500);
+        setInterval(RequestEffectList, 1500);
 
         $("body").fadeIn(1000);
 
